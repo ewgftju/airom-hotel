@@ -17,7 +17,8 @@ import {
   Sparkles,
   UtensilsCrossed,
 } from "lucide-react";
-import { hotelRates, menuDays, type MenuItem } from "./hotel-data";
+import { hotelRates } from "./hotel-data";
+import MenuExplorer from "./menu-explorer";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -76,19 +77,6 @@ const gallery = [
   { src: "/airom/coffee-station.jpeg", alt: "Чайная и кофейная станция" },
   { src: "/airom/lounge.jpeg", alt: "Зона отдыха в AIROM Hotel" },
 ];
-
-function MenuList({ items }: { items: MenuItem[] }) {
-  return (
-    <div className="menu-list">
-      {items.map(([name, portion]) => (
-        <div className="menu-list-row" key={`${name}-${portion}`}>
-          <span>{name}</span>
-          {portion && <strong>{portion}</strong>}
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function Brand({ light = false }: { light?: boolean }) {
   return (
@@ -279,39 +267,11 @@ export default function Home() {
             <h2>Три рациона для игрового режима</h2>
           </div>
           <div className="menu-heading-note">
-            <p>Выберите день и раскройте завтрак, обед или ужин. В меню указаны блюда и выход порции на одного человека.</p>
-            <span>Листайте карточки →</span>
+            <p>Сначала выберите игровой день, затем завтрак, обед или ужин. Ниже появятся все блюда и выход порции на одного человека.</p>
           </div>
         </div>
 
-        <div className="menu-carousel" aria-label="Варианты меню игровых дней">
-          {menuDays.map((day, dayIndex) => (
-            <article className="menu-day-card" key={day.day}>
-              <header className="menu-day-header">
-                <div>
-                  <span>{day.card}</span>
-                  <h3>{day.day}</h3>
-                </div>
-                <strong>0{dayIndex + 1}</strong>
-              </header>
-
-              {([
-                ["Завтрак", day.breakfast],
-                ["Обед", day.lunch],
-                ["Ужин", day.dinner],
-              ] as const).map(([meal, items], mealIndex) => (
-                <details className="menu-meal" key={meal} open={dayIndex === 0 && mealIndex === 0}>
-                  <summary>
-                    <span>{meal}</span>
-                    <small>{items.length} позиций</small>
-                    <ChevronDown size={20} />
-                  </summary>
-                  <MenuList items={items} />
-                </details>
-              ))}
-            </article>
-          ))}
-        </div>
+        <MenuExplorer />
 
         <div className="menu-footnote">
           <UtensilsCrossed size={20} />
