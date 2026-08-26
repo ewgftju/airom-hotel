@@ -42,6 +42,7 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
 
 const phoneDisplay = "+7 775 808 3169";
 const phoneHref = "tel:+77758083169";
+const whatsappHref = "https://wa.me/77758083169";
 const instagramHref = "https://www.instagram.com/airom_hotel/";
 const mapHref =
   "https://2gis.kz/atyrau/firm/70000001111109238/51.93015%2C47.127758?m=51.930144%2C47.12775%2F18";
@@ -136,7 +137,12 @@ export default function Home() {
             Комфортные номера, трёхразовое питание и полный пакет документов — всё в одном месте.
           </p>
           <div className="hero-actions">
-            <a className="button button--primary" href={phoneHref}>
+            <a
+              className="button button--primary"
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+            >
               Забронировать
               <ArrowRight size={19} />
             </a>
