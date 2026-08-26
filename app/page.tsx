@@ -5,8 +5,10 @@ import {
   Bath,
   BedDouble,
   Check,
+  ChevronDown,
   Clock3,
   FileCheck2,
+  Hotel,
   MapPin,
   Menu,
   Monitor,
@@ -15,6 +17,7 @@ import {
   Sparkles,
   UtensilsCrossed,
 } from "lucide-react";
+import { hotelRates, menuDays, type MenuItem } from "./hotel-data";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -74,6 +77,19 @@ const gallery = [
   { src: "/airom/lounge.jpeg", alt: "Зона отдыха в AIROM Hotel" },
 ];
 
+function MenuList({ items }: { items: MenuItem[] }) {
+  return (
+    <div className="menu-list">
+      {items.map(([name, portion]) => (
+        <div className="menu-list-row" key={`${name}-${portion}`}>
+          <span>{name}</span>
+          {portion && <strong>{portion}</strong>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function Brand({ light = false }: { light?: boolean }) {
   return (
     <span className={`brand-lockup ${light ? "brand-lockup--light" : ""}`}>
@@ -93,8 +109,9 @@ export default function Home() {
 
         <nav className="desktop-nav" aria-label="Основная навигация">
           <a href="#rooms">Номера</a>
-          <a href="#food">Питание</a>
+          <a href="#menu">Меню</a>
           <a href="#teams">Для команд</a>
+          <a href="#rates">Цены</a>
           <a href="#gallery">Галерея</a>
           <a href="#contacts">Контакты</a>
         </nav>
@@ -110,8 +127,9 @@ export default function Home() {
           </summary>
           <nav aria-label="Мобильная навигация">
             <a href="#rooms">Номера</a>
-            <a href="#food">Питание</a>
+            <a href="#menu">Меню</a>
             <a href="#teams">Для команд</a>
+            <a href="#rates">Цены</a>
             <a href="#gallery">Галерея</a>
             <a href="#contacts">Контакты</a>
             <a href={phoneHref}>{phoneDisplay}</a>
@@ -164,9 +182,9 @@ export default function Home() {
             sizes="(max-width: 900px) 100vw, 54vw"
           />
           <div className="hero-price">
-            <span>Проживание</span>
-            <strong>от 19 500 ₸</strong>
-            <small>с человека в сутки</small>
+            <span>Номера в сети AIROM</span>
+            <strong>от 14 000 ₸</strong>
+            <small>за номер в сутки</small>
           </div>
           <div className="hero-corner" aria-hidden="true" />
         </div>
@@ -254,6 +272,53 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section menu-section" id="menu">
+        <div className="section-heading menu-heading">
+          <div>
+            <p className="eyebrow">Меню игровых дней</p>
+            <h2>Три рациона для игрового режима</h2>
+          </div>
+          <div className="menu-heading-note">
+            <p>Выберите день и раскройте завтрак, обед или ужин. В меню указаны блюда и выход порции на одного человека.</p>
+            <span>Листайте карточки →</span>
+          </div>
+        </div>
+
+        <div className="menu-carousel" aria-label="Варианты меню игровых дней">
+          {menuDays.map((day, dayIndex) => (
+            <article className="menu-day-card" key={day.day}>
+              <header className="menu-day-header">
+                <div>
+                  <span>{day.card}</span>
+                  <h3>{day.day}</h3>
+                </div>
+                <strong>0{dayIndex + 1}</strong>
+              </header>
+
+              {([
+                ["Завтрак", day.breakfast],
+                ["Обед", day.lunch],
+                ["Ужин", day.dinner],
+              ] as const).map(([meal, items], mealIndex) => (
+                <details className="menu-meal" key={meal} open={dayIndex === 0 && mealIndex === 0}>
+                  <summary>
+                    <span>{meal}</span>
+                    <small>{items.length} позиций</small>
+                    <ChevronDown size={20} />
+                  </summary>
+                  <MenuList items={items} />
+                </details>
+              ))}
+            </article>
+          ))}
+        </div>
+
+        <div className="menu-footnote">
+          <UtensilsCrossed size={20} />
+          <p>Меню можно скорректировать под задачи и график команды. Стоимость индивидуального рациона согласовывается отдельно.</p>
+        </div>
+      </section>
+
       <section className="section teams-section" id="teams">
         <div className="teams-intro">
           <p className="eyebrow">Для команд и организаций</p>
@@ -294,15 +359,75 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section rates-section" id="rates">
+        <div className="section-heading rates-heading">
+          <div>
+            <p className="eyebrow">Стоимость проживания</p>
+            <h2>Два формата размещения AIROM</h2>
+          </div>
+          <p>Цены указаны за сутки. В тарифах с питанием итоговая стоимость уже включает выбранный рацион.</p>
+        </div>
+
+        <div className="hotels-pricing">
+          {hotelRates.map((hotel, hotelIndex) => (
+            <article className={`hotel-price-card hotel-price-card--${hotelIndex + 1}`} key={hotel.name}>
+              <header className="hotel-price-header">
+                <div className="hotel-price-icon"><Hotel size={24} /></div>
+                <div>
+                  <p>Гостиница</p>
+                  <h3>{hotel.name}</h3>
+                  <span>{hotel.address}</span>
+                </div>
+                <strong>{hotel.from}</strong>
+              </header>
+
+              <div className="room-rate-list">
+                {hotel.rooms.map((room, roomIndex) => (
+                  <details className="room-rate" key={room.name} open={roomIndex === 0}>
+                    <summary>
+                      <span><strong>{room.name}</strong><small>{room.description}</small></span>
+                      <ChevronDown size={20} />
+                    </summary>
+                    <div className="rate-table" role="table" aria-label={`${hotel.name}: ${room.name}`}>
+                      <div className="rate-table-head" role="row">
+                        <span>Тариф</span>
+                        <span>За номер</span>
+                        <span>На человека</span>
+                      </div>
+                      {room.options.map((option) => (
+                        <div className="rate-row" role="row" key={option.label}>
+                          <span>{option.label}</span>
+                          <strong>{option.total}</strong>
+                          <small>{option.perPerson ?? "—"}</small>
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                ))}
+              </div>
+
+              {hotelIndex === 1 && (
+                <p className="hotel-price-note">Для одноместных номеров отдельная цена питания в исходном прайсе не указана — показываем готовую стоимость каждого пакета.</p>
+              )}
+            </article>
+          ))}
+        </div>
+
+        <div className="rates-legend">
+          <span><i /> За номер — итоговая стоимость выбранного тарифа</span>
+          <span><i /> На человека — расчёт для многоместного размещения</span>
+        </div>
+      </section>
+
       <section className="price-section">
         <div>
           <p className="eyebrow eyebrow--light">Бронирование</p>
           <h2>Подберём условия под вашу команду</h2>
         </div>
         <div className="price-main">
-          <span>Проживание от</span>
-          <strong>19 500 ₸</strong>
-          <small>с человека в сутки</small>
+          <span>Номера от</span>
+          <strong>14 000 ₸</strong>
+          <small>за номер в сутки</small>
         </div>
         <div className="price-actions">
           <a className="button button--gold" href={phoneHref}><Phone size={18} /> Позвонить</a>
@@ -372,8 +497,9 @@ export default function Home() {
         </div>
         <div className="footer-links">
           <a href="#rooms">Номера</a>
-          <a href="#food">Питание</a>
+          <a href="#menu">Меню</a>
           <a href="#teams">Для команд</a>
+          <a href="#rates">Цены</a>
           <a href="#contacts">Контакты</a>
         </div>
         <div className="footer-contact">
