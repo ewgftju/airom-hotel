@@ -444,26 +444,12 @@ section[id] {
 
 .brand-statement {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 44px;
   padding: 46px clamp(30px, 6vw, 100px);
   background: var(--teal);
   color: var(--white);
-}
-
-.statement-mark {
-  display: grid;
-  width: 82px;
-  height: 82px;
-  place-items: center;
-  border: 1px solid var(--gold);
-  clip-path: polygon(50% 0, 100% 24%, 100% 76%, 50% 100%, 0 76%, 0 24%);
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--gold-light);
-  font-size: 24px;
-  font-weight: 900;
-  letter-spacing: -0.08em;
 }
 
 .brand-statement p {
@@ -1597,11 +1583,11 @@ section.teams-section {
   }
 
   .brand-statement {
-    grid-template-columns: 90px 1fr;
+    grid-template-columns: 1fr;
   }
 
   .brand-statement a {
-    grid-column: 2;
+    grid-column: 1;
     justify-self: start;
   }
 
@@ -1794,11 +1780,6 @@ section.teams-section {
 
   .brand-statement a {
     grid-column: auto;
-  }
-
-  .statement-mark {
-    width: 68px;
-    height: 68px;
   }
 
   .section {

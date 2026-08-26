@@ -179,7 +179,6 @@ export default function Home() {
       </section>
 
       <section className="brand-statement" aria-label="О гостинице">
-        <div className="statement-mark">AR</div>
         <p>
           <span>AIROM —</span> спокойная база между тренировками, играми и дорогой.
         </p>
