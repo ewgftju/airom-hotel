@@ -170,8 +170,8 @@ export default function Home() {
             sizes="(max-width: 900px) 100vw, 54vw"
           />
           <div className="hero-price">
-            <span>Номера в сети AIROM</span>
-            <strong>от 14 000 ₸</strong>
+            <span>Номера AIROM Hotel</span>
+            <strong>от 24 000 ₸</strong>
             <small>за номер в сутки</small>
           </div>
           <div className="hero-corner" aria-hidden="true" />
@@ -280,27 +280,30 @@ export default function Home() {
       </section>
 
       <section className="section teams-section" id="teams">
-        <div className="teams-intro">
-          <p className="eyebrow">Для команд и организаций</p>
-          <h2>Размещение, которое удобно согласовать</h2>
+        <div className="section-heading teams-heading">
+          <div>
+            <p className="eyebrow">Для команд и организаций</p>
+            <h2>Размещение, которое удобно согласовать</h2>
+          </div>
           <p>
-            Работаем с командами, клубами и организациями. Берём на себя бытовую часть заезда и готовим документы для бухгалтерии.
+            Размещаем команды, клубы и организации, координируем питание и готовим документы для бухгалтерии.
           </p>
         </div>
 
-        <div className="teams-layout">
-          <article className="teams-card teams-card--accent">
+        <div className="teams-board">
+          <div className="teams-board-intro">
             <FileCheck2 size={30} />
             <p className="card-kicker">Документы</p>
             <h3>Полный пакет для организаций</h3>
-            <ul>
-              <li><Check size={17} /> Договор</li>
-              <li><Check size={17} /> Счёт на оплату</li>
-              <li><Check size={17} /> ЭАВР и ЭСФ</li>
-              <li><Check size={17} /> Фискальный чек</li>
-            </ul>
             <small>Общеустановленный режим налогообложения · НДС</small>
-          </article>
+          </div>
+
+          <ul className="teams-documents">
+            <li><Check size={18} /> Договор</li>
+            <li><Check size={18} /> Счёт на оплату</li>
+            <li><Check size={18} /> ЭАВР и ЭСФ</li>
+            <li><Check size={18} /> Фискальный чек</li>
+          </ul>
 
           <div className="teams-benefits">
             <article>
@@ -323,7 +326,7 @@ export default function Home() {
         <div className="section-heading rates-heading">
           <div>
             <p className="eyebrow">Стоимость проживания</p>
-            <h2>Два формата размещения AIROM</h2>
+            <h2>Стоимость номеров AIROM Hotel</h2>
           </div>
           <p>Цены указаны за сутки. В тарифах с питанием итоговая стоимость уже включает выбранный рацион.</p>
         </div>
@@ -366,7 +369,7 @@ export default function Home() {
                 ))}
               </div>
 
-              {hotelIndex === 1 && (
+              {hotelIndex === 0 && (
                 <p className="hotel-price-note">Для одноместных номеров отдельная цена питания в исходном прайсе не указана — показываем готовую стоимость каждого пакета.</p>
               )}
             </article>
@@ -386,7 +389,7 @@ export default function Home() {
         </div>
         <div className="price-main">
           <span>Номера от</span>
-          <strong>14 000 ₸</strong>
+          <strong>24 000 ₸</strong>
           <small>за номер в сутки</small>
         </div>
         <div className="price-actions">

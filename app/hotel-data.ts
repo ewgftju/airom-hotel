@@ -19,43 +19,6 @@ export type HotelRate = {
 
 export const hotelRates: HotelRate[] = [
   {
-    name: "Sports Hotel–AiRom",
-    address: "г. Атырау, ул. Виссариона Белинского, 16а",
-    from: "от 14 000 ₸",
-    rooms: [
-      {
-        name: "Двухместный стандарт",
-        description: "Две раздельные кровати",
-        options: [
-          { label: "Без питания", total: "16 000 ₸", perPerson: "8 000 ₸" },
-          { label: "С завтраком", total: "20 000 ₸", perPerson: "10 000 ₸" },
-          { label: "Завтрак + ужин", total: "27 000 ₸", perPerson: "13 500 ₸" },
-          { label: "Трёхразовое питание", total: "33 000 ₸", perPerson: "16 500 ₸" },
-        ],
-      },
-      {
-        name: "Одноместный улучшенный",
-        description: "Одна кровать",
-        options: [
-          { label: "Без питания", total: "14 000 ₸" },
-          { label: "С завтраком", total: "16 000 ₸" },
-          { label: "Завтрак + ужин", total: "19 500 ₸" },
-          { label: "Трёхразовое питание", total: "23 000 ₸" },
-        ],
-      },
-      {
-        name: "Четырёхместный улучшенный",
-        description: "Две двухъярусные кровати",
-        options: [
-          { label: "Без питания", total: "16 000 ₸", perPerson: "4 000 ₸" },
-          { label: "С завтраком", total: "24 000 ₸", perPerson: "6 000 ₸" },
-          { label: "Завтрак + ужин", total: "37 400 ₸", perPerson: "9 500 ₸" },
-          { label: "Трёхразовое питание", total: "50 800 ₸", perPerson: "12 500 ₸" },
-        ],
-      },
-    ],
-  },
-  {
     name: "AiRom Hotel",
     address: "г. Атырау, ул. Виссариона Белинского, 25",
     from: "от 24 000 ₸",
