@@ -494,7 +494,13 @@ section[id] {
 .section {
   max-width: 1480px;
   margin: 0 auto;
-  padding: clamp(72px, 6vw, 104px) clamp(24px, 5.5vw, 84px);
+  padding: clamp(64px, 5vw, 84px) clamp(24px, 5.5vw, 84px);
+}
+
+/* Adjacent content sections share one vertical gap instead of stacking
+   a full bottom and top padding into a large empty area. */
+.section + .section {
+  padding-top: 0;
 }
 
 .section-heading {
