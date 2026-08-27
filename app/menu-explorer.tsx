@@ -1,15 +1,10 @@
 "use client";
 
 import { useId, useState } from "react";
-import { menuDays, type MenuDay, type MenuItem } from "./hotel-data";
+import type { SiteLocale } from "./content";
+import { getMenuDays, type MenuDay, type MenuItem } from "./hotel-data";
 
 type MealKey = "breakfast" | "lunch" | "dinner";
-
-const meals: { key: MealKey; label: string }[] = [
-  { key: "breakfast", label: "Завтрак" },
-  { key: "lunch", label: "Обед" },
-  { key: "dinner", label: "Ужин" },
-];
 
 function MenuList({ items }: { items: MenuItem[] }) {
   return (
@@ -24,10 +19,37 @@ function MenuList({ items }: { items: MenuItem[] }) {
   );
 }
 
-export default function MenuExplorer() {
+export default function MenuExplorer({ locale }: { locale: SiteLocale }) {
   const [dayIndex, setDayIndex] = useState(0);
   const [mealKey, setMealKey] = useState<MealKey>("breakfast");
   const panelId = useId();
+  const menuDays = getMenuDays(locale);
+  const labels = locale === "kk"
+    ? {
+        meals: [
+          { key: "breakfast" as const, label: "Таңғы ас" },
+          { key: "lunch" as const, label: "Түскі ас" },
+          { key: "dinner" as const, label: "Кешкі ас" },
+        ],
+        dayPicker: "Ойын күнін таңдау",
+        mealPicker: "Тамақтану уақытын таңдау",
+        day: "Күн",
+        positions: "тағам",
+        portion: "Бір адамға арналған рацион",
+      }
+    : {
+        meals: [
+          { key: "breakfast" as const, label: "Завтрак" },
+          { key: "lunch" as const, label: "Обед" },
+          { key: "dinner" as const, label: "Ужин" },
+        ],
+        dayPicker: "Выбор игрового дня",
+        mealPicker: "Выбор приёма пищи",
+        day: "День",
+        positions: "позиций",
+        portion: "Рацион на одного человека",
+      };
+  const meals = labels.meals;
   const activeDay: MenuDay = menuDays[dayIndex];
   const activeMeal = meals.find((meal) => meal.key === mealKey) ?? meals[0];
   const items = activeDay[activeMeal.key];
@@ -40,7 +62,7 @@ export default function MenuExplorer() {
           <h3>{activeDay.day}</h3>
         </div>
 
-        <div className="menu-day-picker" role="tablist" aria-label="Выбор игрового дня">
+        <div className="menu-day-picker" role="tablist" aria-label={labels.dayPicker}>
           {menuDays.map((day, index) => (
             <button
               type="button"
@@ -50,13 +72,13 @@ export default function MenuExplorer() {
               key={day.day}
               onClick={() => setDayIndex(index)}
             >
-              День {index + 1}
+              {labels.day} {index + 1}
             </button>
           ))}
         </div>
       </div>
 
-      <div className="menu-meal-picker" role="tablist" aria-label="Выбор приёма пищи">
+      <div className="menu-meal-picker" role="tablist" aria-label={labels.mealPicker}>
         {meals.map((meal) => (
           <button
             type="button"
@@ -68,7 +90,7 @@ export default function MenuExplorer() {
             onClick={() => setMealKey(meal.key)}
           >
             <span>{meal.label}</span>
-            <small>{activeDay[meal.key].length} позиций</small>
+            <small>{activeDay[meal.key].length} {labels.positions}</small>
           </button>
         ))}
       </div>
@@ -76,10 +98,10 @@ export default function MenuExplorer() {
       <div className="menu-panel" id={panelId} role="tabpanel">
         <div className="menu-panel-heading">
           <div>
-            <span>Рацион на одного человека</span>
+            <span>{labels.portion}</span>
             <h4>{activeMeal.label}</h4>
           </div>
-          <strong>{items.length} позиций</strong>
+          <strong>{items.length} {labels.positions}</strong>
         </div>
         <MenuList items={items} />
       </div>
