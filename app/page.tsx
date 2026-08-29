@@ -14,7 +14,6 @@ import {
   Hotel,
   MapPin,
   Menu,
-  MessageCircle,
   Monitor,
   Phone,
   ShieldCheck,
@@ -41,6 +40,25 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
       <rect x="3" y="3" width="18" height="18" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      aria-hidden="true"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M20.5 11.8a8.5 8.5 0 0 1-12.6 7.5l-4.4 1.2 1.2-4.2a8.5 8.5 0 1 1 15.8-4.5Z" />
+      <path d="M8.2 7.7c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.8 2c.1.2.1.4 0 .6l-.6.8c-.2.2-.2.4 0 .7.5.9 1.2 1.6 2.1 2.1.3.2.5.2.7 0l.9-1.1c.2-.2.4-.3.7-.2l2.1 1c.3.1.4.3.4.5 0 .4-.2 1.2-.6 1.7-.4.5-1.1.8-1.9.8-1 0-2.5-.4-4.2-1.9-2.1-1.8-3.5-4.6-3.6-6.3 0-.7.2-1.2.5-1.6Z" />
     </svg>
   );
 }
@@ -148,11 +166,12 @@ export default function Home() {
           <p className="hero-lead">{t.hero.lead}</p>
           <div className="hero-actions">
             <div className="hero-booking">
-              <a className="button button--primary" href={whatsappHref} target="_blank" rel="noreferrer">
+              <a className="button button--primary" href={instagramHref} target="_blank" rel="noreferrer">
+                <InstagramIcon size={18} />
                 {t.hero.book}
                 <ArrowRight size={19} />
               </a>
-              <span><MessageCircle size={14} /> {t.hero.whatsappNote}</span>
+              <span><InstagramIcon size={14} /> {t.hero.whatsappNote}</span>
             </div>
             <a className="button button--ghost" href="#teams">
               {t.hero.teamTerms}
@@ -404,8 +423,8 @@ export default function Home() {
         </div>
         <div className="price-actions">
           <a className="button button--gold" href={phoneHref}><Phone size={18} /> {t.booking.call}</a>
-          <a className="button button--outline-light" href={instagramHref} target="_blank" rel="noreferrer">
-            <InstagramIcon size={18} /> {t.booking.instagram}
+          <a className="button button--outline-light" href={whatsappHref} target="_blank" rel="noreferrer">
+            <WhatsAppIcon size={18} /> {t.booking.instagram}
           </a>
         </div>
       </section>
@@ -484,7 +503,7 @@ export default function Home() {
 
       <div className="mobile-contact-bar">
         <a href={phoneHref}><Phone size={18} /> {t.booking.call}</a>
-        <a href={instagramHref} target="_blank" rel="noreferrer"><InstagramIcon size={18} /> {t.footer.write}</a>
+        <a href={whatsappHref} target="_blank" rel="noreferrer"><WhatsAppIcon size={18} /> {t.footer.write}</a>
       </div>
     </main>
   );
