@@ -185,6 +185,31 @@ section[id] {
   color: var(--gold);
 }
 
+.header-write {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid var(--teal);
+  background: var(--teal);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.header-write:hover {
+  border-color: var(--teal-soft);
+  background: var(--teal-soft);
+}
+
+.header-write svg {
+  flex: 0 0 auto;
+}
+
 .header-controls {
   justify-self: end;
   display: flex;
@@ -1690,7 +1715,8 @@ section.teams-section {
     padding-left: 20px;
   }
 
-  .header-phone {
+  .header-phone,
+  .header-write {
     display: none;
   }
 

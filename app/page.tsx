@@ -138,6 +138,10 @@ export default function Home() {
             <Phone size={17} strokeWidth={2} />
             <span>{phoneDisplay}</span>
           </a>
+          <a className="header-write" href={whatsappHref} target="_blank" rel="noreferrer">
+            <WhatsAppIcon size={16} />
+            <span>{t.footer.write}</span>
+          </a>
         </div>
 
         <details className="mobile-menu">
