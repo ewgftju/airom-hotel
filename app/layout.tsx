@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   description:
     "AIROM Hotel в Атырау: номера от 24 000 ₸, меню игровых дней, трёхразовое питание, размещение команд и документы для организаций.",
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/airom-favicon.png",
+    shortcut: "/airom-favicon.png",
+    apple: "/airom-favicon.png",
   },
 };
 
