@@ -2120,10 +2120,6 @@ section.teams-section {
     min-height: 470px;
   }
 
-  .map-frame > img {
-    object-position: 66% center;
-  }
-
   .contact-copy {
     padding: 70px 22px 82px;
   }

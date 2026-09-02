@@ -453,10 +453,9 @@ export default function Home() {
       <section className="contacts-section" id="contacts">
         <a className="map-frame" href={mapHref} target="_blank" rel="noreferrer" aria-label={t.contacts.mapLabel}>
           <Image
-            src="/airom/location-map.svg"
+            src="/airom/location-2gis.jpg"
             alt={t.contacts.mapAlt}
             fill
-            unoptimized
             sizes="(max-width: 900px) 100vw, 54vw"
           />
         </a>
