@@ -67,6 +67,8 @@ const phoneHref = "tel:+77758083169";
 const instagramHref = "https://www.instagram.com/airom_hotel/";
 const mapHref =
   "https://2gis.kz/atyrau/firm/70000001111109238/51.93015%2C47.127758?m=51.930144%2C47.12775%2F18";
+const mapEmbedHref =
+  "https://www.openstreetmap.org/export/embed.html?bbox=51.916894%2C47.1206%2C51.943394%2C47.1349&layer=mapnik";
 
 const amenityIcons = [BedDouble, Bath, Monitor, ShieldCheck];
 
@@ -451,14 +453,18 @@ export default function Home() {
       </section>
 
       <section className="contacts-section" id="contacts">
-        <a className="map-frame" href={mapHref} target="_blank" rel="noreferrer" aria-label={t.contacts.mapLabel}>
-          <Image
-            src="/airom/location-2gis.jpg"
-            alt={t.contacts.mapAlt}
-            fill
-            sizes="(max-width: 900px) 100vw, 54vw"
+        <div className="map-frame">
+          <iframe
+            src={mapEmbedHref}
+            title={t.contacts.mapAlt}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           />
-        </a>
+          <div className="map-tone" aria-hidden="true" />
+          <a className="map-link-cover" href={mapHref} target="_blank" rel="noreferrer" aria-label={t.contacts.mapLabel}>
+            <span className="map-center-marker"><MapPin size={32} /></span>
+          </a>
+        </div>
         <div className="contact-copy">
           <p className="eyebrow">{t.contacts.eyebrow}</p>
           <h2>{t.contacts.title}<br />{t.contacts.city}</h2>

@@ -1542,11 +1542,52 @@ section.teams-section {
   clip-path: polygon(0 0, 100% 0, 93% 100%, 0 100%);
 }
 
-.map-frame > img {
-  width: 100% !important;
-  height: 100% !important;
-  top: 0 !important;
-  object-position: center;
+.map-frame > iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(0.78) contrast(1.03);
+  pointer-events: none;
+}
+
+.map-tone {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 70, 91, 0.01), rgba(0, 70, 91, 0.16));
+  pointer-events: none;
+}
+
+.map-link-cover {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  cursor: pointer;
+}
+
+.map-center-marker {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  display: grid;
+  width: 64px;
+  height: 64px;
+  place-items: center;
+  border: 6px solid rgba(255, 255, 255, 0.94);
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 14px 36px rgba(0, 70, 91, 0.3);
+  color: var(--teal);
+  transform: translate(-50%, -50%);
+}
+
+.map-center-marker::after {
+  position: absolute;
+  inset: -16px;
+  border: 2px solid rgba(199, 147, 78, 0.42);
+  border-radius: 50%;
+  content: "";
 }
 
 .contact-copy {
