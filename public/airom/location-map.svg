@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">Расположение AIROM Hotel в Атырау</title>
+  <desc id="desc">Схема улицы Виссариона Белинского с отметкой AIROM Hotel</desc>
+  <defs>
+    <pattern id="plots" width="92" height="92" patternUnits="userSpaceOnUse" patternTransform="rotate(12)">
+      <path d="M0 0H92V92" fill="none" stroke="#d9d2bf" stroke-width="1" opacity=".42"/>
+    </pattern>
+  </defs>
+
+  <rect width="1400" height="900" fill="#eee9d6"/>
+  <rect width="1400" height="900" fill="url(#plots)"/>
+
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M-70 770C190 690 308 604 430 474C551 345 694 255 829 97" stroke="#ded7c3" stroke-width="42"/>
+    <path d="M-70 770C190 690 308 604 430 474C551 345 694 255 829 97" stroke="#fffdf6" stroke-width="30"/>
+    <path d="M1050-30C1056 155 988 273 846 383C744 462 660 563 603 719C572 805 540 856 490 930" stroke="#ded7c3" stroke-width="40"/>
+    <path d="M1050-30C1056 155 988 273 846 383C744 462 660 563 603 719C572 805 540 856 490 930" stroke="#fffdf6" stroke-width="28"/>
+    <path d="M899 500C1074 548 1240 659 1460 800" stroke="#ded7c3" stroke-width="36"/>
+    <path d="M899 500C1074 548 1240 659 1460 800" stroke="#fffdf6" stroke-width="24"/>
+    <path d="M-40 132C154 196 315 253 475 358" stroke="#ded7c3" stroke-width="32"/>
+    <path d="M-40 132C154 196 315 253 475 358" stroke="#fffdf6" stroke-width="21"/>
+  </g>
+
+  <g fill="#c9c8c2" stroke="#bab9b2" stroke-width="2">
+    <path d="M58 76L267 119L241 226L32 185Z"/>
+    <path d="M283 119L411 152L389 238L261 207Z"/>
+    <path d="M101 280L331 336L298 468L69 414Z"/>
+    <path d="M367 252L513 302L473 414L333 365Z"/>
+    <path d="M436 47L573 91L539 198L404 155Z"/>
+    <path d="M866 51L1018 87L988 199L835 164Z"/>
+    <path d="M1083 88L1304 147L1267 282L1047 224Z"/>
+    <path d="M1130 311L1326 356L1303 459L1108 417Z"/>
+    <path d="M1039 637L1167 690L1119 808L990 755Z"/>
+    <path d="M1193 568L1350 629L1310 733L1152 673Z"/>
+    <path d="M790 666L920 704L887 817L757 780Z"/>
+    <path d="M641 702L724 728L696 819L613 793Z"/>
+    <path d="M153 616L279 664L238 772L111 725Z"/>
+    <path d="M316 667L407 700L375 789L285 756Z"/>
+  </g>
+
+  <g fill="#d6cfba" stroke="#c7bea5" stroke-width="2">
+    <path d="M498 431L622 395L668 455L623 523L504 506L469 469Z"/>
+    <path d="M843 464L956 432L1018 489L980 563L865 551L823 511Z"/>
+    <path d="M724 189L816 153L862 216L827 284L730 272L690 228Z"/>
+  </g>
+
+  <g fill="#767970" font-family="Arial, Helvetica, sans-serif" font-size="21">
+    <text x="354" y="210">15</text>
+    <text x="422" y="565">14</text>
+    <text x="496" y="411">16а</text>
+    <text x="897" y="421">30/2</text>
+    <text x="1216" y="526">19</text>
+    <text x="1091" y="590">20/1</text>
+    <text x="624" y="678">28</text>
+    <text x="812" y="640">18а</text>
+  </g>
+
+  <g fill="#344d54" font-family="Arial, Helvetica, sans-serif">
+    <text x="384" y="656" font-size="25" transform="rotate(-43 384 656)">Виссариона Белинского</text>
+    <text x="747" y="302" font-size="28" transform="rotate(-49 747 302)">Виссариона Белинского</text>
+  </g>
+
+  <path d="M1002 760C1154 785 1291 821 1438 868" fill="none" stroke="#d09a4a" stroke-width="32"/>
+  <path d="M1002 760C1154 785 1291 821 1438 868" fill="none" stroke="#f4d27a" stroke-width="5" opacity=".8"/>
+
+  <ellipse cx="700" cy="654" rx="70" ry="18" fill="#003747" opacity=".16"/>
+  <g>
+    <path d="M700 224c-86 0-156 69-156 154c0 113 156 260 156 260s156-147 156-260c0-85-70-154-156-154Z" fill="#00465b" stroke="#f6f0e5" stroke-width="12"/>
+    <circle cx="700" cy="378" r="54" fill="#f6f0e5"/>
+    <circle cx="700" cy="636" r="25" fill="#d09a4a" stroke="#f6f0e5" stroke-width="8"/>
+    <rect x="789" y="462" width="365" height="92" rx="14" fill="#fff" stroke="#ded8ca" stroke-width="3"/>
+    <text x="832" y="522" fill="#00465b" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="700" letter-spacing="2">AIROM HOTEL</text>
+  </g>
+
+  <path d="M0 0H1400V900H0Z" fill="none" stroke="#d09a4a" stroke-width="5" opacity=".75"/>
+</svg>

@@ -451,14 +451,15 @@ export default function Home() {
       </section>
 
       <section className="contacts-section" id="contacts">
-        <div className="map-frame" aria-label={t.contacts.mapLabel}>
+        <a className="map-frame" href={mapHref} target="_blank" rel="noreferrer" aria-label={t.contacts.mapLabel}>
           <Image
-            src="/airom/location-poster.webp"
+            src="/airom/location-map.svg"
             alt={t.contacts.mapAlt}
             fill
+            unoptimized
             sizes="(max-width: 900px) 100vw, 54vw"
           />
-        </div>
+        </a>
         <div className="contact-copy">
           <p className="eyebrow">{t.contacts.eyebrow}</p>
           <h2>{t.contacts.title}<br />{t.contacts.city}</h2>

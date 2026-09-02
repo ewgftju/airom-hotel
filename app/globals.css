@@ -1544,9 +1544,9 @@ section.teams-section {
 
 .map-frame > img {
   width: 100% !important;
-  height: 155% !important;
-  top: -37% !important;
-  object-position: center 48%;
+  height: 100% !important;
+  top: 0 !important;
+  object-position: center;
 }
 
 .contact-copy {
@@ -2121,8 +2121,7 @@ section.teams-section {
   }
 
   .map-frame > img {
-    height: 148% !important;
-    top: -31% !important;
+    object-position: 66% center;
   }
 
   .contact-copy {
