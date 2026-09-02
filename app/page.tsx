@@ -72,11 +72,11 @@ const amenityIcons = [BedDouble, Bath, Monitor, ShieldCheck];
 
 const gallery = [
   "/airom/hero-room.jpeg",
-  "/airom/room-wide.jpeg",
+  "/airom/room-single-main.webp",
   "/airom/bathroom.jpeg",
-  "/airom/tv-area.jpeg",
+  "/airom/room-single-workspace.webp",
   "/airom/coffee-station.jpeg",
-  "/airom/lounge.jpeg",
+  "/airom/room-twin-wide-new.webp",
 ];
 
 function Brand({ light = false }: { light?: boolean }) {
@@ -234,7 +234,7 @@ export default function Home() {
         <div className="rooms-showcase">
           <figure className="room-main-photo">
             <Image
-              src="/airom/room-wide.jpeg"
+              src="/airom/room-single-workspace.webp"
               alt={t.rooms.mainAlt}
               fill
               sizes="(max-width: 850px) 100vw, 66vw"
@@ -242,7 +242,7 @@ export default function Home() {
           </figure>
           <div className="room-detail-photo">
             <Image
-              src="/airom/bathroom-wide.jpeg"
+              src="/airom/bathroom-detail-new.webp"
               alt={t.rooms.bathroomAlt}
               fill
               sizes="(max-width: 850px) 44vw, 28vw"
