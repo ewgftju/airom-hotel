@@ -424,7 +424,7 @@ export default function Home() {
         </div>
         <div className="price-main">
           <span>{t.booking.roomsFrom}</span>
-          <strong>24 000 ₸</strong>
+          <strong>20 000 ₸</strong>
           <small>{t.booking.perNight}</small>
         </div>
         <div className="price-actions">

@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "AIROM Hotel — гостиница в Атырау",
   description:
-    "AIROM Hotel в Атырау: номера от 24 000 ₸, меню игровых дней, трёхразовое питание, размещение команд и документы для организаций.",
+    "AIROM Hotel в Атырау: номера от 20 000 ₸, меню игровых дней, трёхразовое питание, размещение команд и документы для организаций.",
   icons: {
     icon: "/airom-favicon-white.png",
     shortcut: "/airom-favicon-white.png",

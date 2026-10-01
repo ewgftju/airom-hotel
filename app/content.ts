@@ -30,7 +30,7 @@ export const siteCopy = {
       documents: "закрывающих документов",
       imageAlt: "Светлый номер AIROM Hotel с двумя раздельными кроватями",
       networkRooms: "Номера AIROM Hotel",
-      from: "от 24 000 ₸",
+      from: "от 20 000 ₸",
       perNight: "за номер в сутки",
     },
     statement: {
@@ -193,7 +193,7 @@ export const siteCopy = {
       documents: "жабу құжаттары",
       imageAlt: "Екі бөлек кереуеті бар AIROM Hotel жарық бөлмесі",
       networkRooms: "AIROM Hotel бөлмелері",
-      from: "24 000 ₸-ден бастап",
+      from: "20 000 ₸-ден бастап",
       perNight: "бір бөлмеге тәулігіне",
     },
     statement: {
