@@ -380,11 +380,15 @@ export default function Home() {
               </header>
 
               <div className="room-rate-list">
-                {hotel.rooms.map((room, roomIndex) => (
-                  <details className="room-rate" key={room.name} open={roomIndex === 0}>
+                {hotel.rooms.map((room) => (
+                  <details className="room-rate" key={room.name} open>
                     <summary>
-                      <span><strong>{room.name}</strong><small>{room.description}</small></span>
-                      <ChevronDown size={20} />
+                      <span className="room-rate-heading"><strong>{room.name}</strong><small>{room.description}</small></span>
+                      <span className="room-rate-toggle">
+                        <span className="room-rate-expand">{t.rates.expand}</span>
+                        <span className="room-rate-collapse">{t.rates.collapse}</span>
+                        <ChevronDown size={20} aria-hidden="true" />
+                      </span>
                     </summary>
                     <div className="rate-table" role="table" aria-label={`${hotel.name}: ${room.name}`}>
                       <div className="rate-table-head" role="row">
