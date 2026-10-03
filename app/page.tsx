@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -23,6 +23,8 @@ import {
 import { siteCopy, type SiteLocale } from "./content";
 import { getHotelRates } from "./hotel-data";
 import MenuExplorer from "./menu-explorer";
+import PhotoGallery from "./photo-gallery";
+import BookingRequest from "./booking-request";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -72,14 +74,6 @@ const mapEmbedHref =
 
 const amenityIcons = [BedDouble, Bath, Monitor, ShieldCheck];
 
-const gallery = [
-  "/airom/hero-room.jpeg",
-  "/airom/room-single-main.webp",
-  "/airom/bathroom.jpeg",
-  "/airom/room-single-workspace.webp",
-  "/airom/coffee-station.jpeg",
-  "/airom/room-twin-wide-new.webp",
-];
 
 function Brand({ light = false }: { light?: boolean }) {
   return (
@@ -92,16 +86,16 @@ function Brand({ light = false }: { light?: boolean }) {
 
 export default function Home() {
   const [locale, setLocale] = useState<SiteLocale>("ru");
+  const mobileMenu = useRef<HTMLDetailsElement>(null);
   const t = siteCopy[locale];
   const hotelRates = getHotelRates(locale);
   const whatsappHref = `https://wa.me/77758083169?text=${encodeURIComponent(t.whatsapp)}`;
 
   useEffect(() => {
-    const savedLocale = window.localStorage.getItem("airom-language");
-    if (savedLocale === "ru" || savedLocale === "kk") {
-      setLocale(savedLocale);
-      document.documentElement.lang = savedLocale;
-    }
+    try {
+      const savedLocale = window.localStorage.getItem("airom-language");
+      if (savedLocale === "ru" || savedLocale === "kk") setLocale(savedLocale);
+    } catch { /* Language selection also works when browser storage is unavailable. */ }
   }, []);
 
   useEffect(() => {
@@ -111,7 +105,7 @@ export default function Home() {
 
   const selectLanguage = (nextLocale: SiteLocale) => {
     setLocale(nextLocale);
-    window.localStorage.setItem("airom-language", nextLocale);
+    try { window.localStorage.setItem("airom-language", nextLocale); } catch { /* Keep the selected language for this visit. */ }
   };
 
   return (
@@ -146,11 +140,18 @@ export default function Home() {
           </a>
         </div>
 
-        <details className="mobile-menu">
+        <details className="mobile-menu" ref={mobileMenu} onKeyDown={(event) => {
+          if (event.key === "Escape" && mobileMenu.current) {
+            mobileMenu.current.open = false;
+            mobileMenu.current.querySelector("summary")?.focus();
+          }
+        }}>
           <summary aria-label={t.openMenu}>
             <Menu size={24} />
           </summary>
-          <nav aria-label={t.mobileNavigation}>
+          <nav aria-label={t.mobileNavigation} onClick={(event) => {
+            if ((event.target as HTMLElement).closest("a") && mobileMenu.current) mobileMenu.current.open = false;
+          }}>
             <a href="#rooms">{t.nav.rooms}</a>
             <a href="#menu">{t.nav.menu}</a>
             <a href="#teams">{t.nav.teams}</a>
@@ -172,15 +173,15 @@ export default function Home() {
           <p className="hero-lead">{t.hero.lead}</p>
           <div className="hero-actions">
             <div className="hero-booking">
-              <a className="button button--primary" href={instagramHref} target="_blank" rel="noreferrer">
-                <InstagramIcon size={18} />
+              <a className="button button--primary" href="#booking">
+                <BedDouble size={18} />
                 {t.hero.book}
                 <ArrowRight size={19} />
               </a>
-              <span><InstagramIcon size={14} /> {t.hero.whatsappNote}</span>
+              <span>{t.hero.whatsappNote}</span>
             </div>
-            <a className="button button--ghost" href="#teams">
-              {t.hero.teamTerms}
+            <a className="button button--ghost" href="#rates">
+              {t.nav.rates}
               <ArrowDownRight size={18} />
             </a>
           </div>
@@ -206,7 +207,8 @@ export default function Home() {
             alt={t.hero.imageAlt}
             fill
             priority
-            sizes="(max-width: 900px) 100vw, 54vw"
+            quality={90}
+            sizes="(max-width: 900px) 100vw, (max-width: 1600px) 80vw, 65vw"
           />
           <div className="hero-price">
             <span>{t.hero.networkRooms}</span>
@@ -239,7 +241,8 @@ export default function Home() {
               src="/airom/room-single-workspace.webp"
               alt={t.rooms.mainAlt}
               fill
-              sizes="(max-width: 850px) 100vw, 66vw"
+              quality={90}
+              sizes="(max-width: 900px) 100vw, (max-width: 1480px) 65vw, 980px"
             />
           </figure>
           <div className="room-detail-photo">
@@ -247,7 +250,8 @@ export default function Home() {
               src="/airom/bathroom-detail-new.webp"
               alt={t.rooms.bathroomAlt}
               fill
-              sizes="(max-width: 850px) 44vw, 28vw"
+              quality={85}
+              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 440px"
             />
             <span>{t.rooms.bathroomLabel}</span>
           </div>
@@ -272,13 +276,80 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section rates-section" id="rates">
+        <div className="section-heading rates-heading">
+          <div>
+            <p className="eyebrow">{t.rates.eyebrow}</p>
+            <h2>{t.rates.title}</h2>
+          </div>
+          <p>{t.rates.intro}</p>
+        </div>
+
+        <div className="hotels-pricing">
+          {hotelRates.map((hotel, hotelIndex) => (
+            <article className={`hotel-price-card hotel-price-card--${hotelIndex + 1}`} key={hotel.name}>
+              <header className="hotel-price-header">
+                <div className="hotel-price-icon"><Hotel size={24} /></div>
+                <div>
+                  <p>{t.rates.hotel}</p>
+                  <h3>{hotel.name}</h3>
+                  <span>{hotel.address}</span>
+                </div>
+                <strong>{hotel.from}</strong>
+              </header>
+
+              <div className="room-rate-list">
+                {hotel.rooms.map((room) => (
+                  <details className="room-rate" key={room.name} open>
+                    <summary>
+                      <span className="room-rate-heading"><strong>{room.name}</strong><small>{room.description}</small></span>
+                      <span className="room-rate-toggle">
+                        <span className="room-rate-expand">{t.rates.expand}</span>
+                        <span className="room-rate-collapse">{t.rates.collapse}</span>
+                        <ChevronDown size={20} aria-hidden="true" />
+                      </span>
+                    </summary>
+                    <div className={`rate-table ${room.options[0].perPerson ? "" : "rate-table--single"}`} role="table" aria-label={`${hotel.name}: ${room.name}`}>
+                      <div className="rate-table-head" role="row">
+                        <span role="columnheader">{t.rates.tariff}</span>
+                        <span role="columnheader">{t.rates.perRoom}</span>
+                        {room.options[0].perPerson && <span role="columnheader">{t.rates.perPerson}</span>}
+                      </div>
+                      {room.options.map((option) => (
+                        <div className="rate-row" role="row" key={option.label}>
+                          <span role="cell">{option.label}</span>
+                          <strong role="cell">{option.total}</strong>
+                          {option.perPerson && <small role="cell">{option.perPerson}</small>}
+                        </div>
+                      ))}
+                    </div>
+                  </details>
+                ))}
+              </div>
+
+              {hotelIndex === 0 && (
+                <p className="hotel-price-note">{t.rates.singleNote}</p>
+              )}
+            </article>
+          ))}
+        </div>
+
+        <div className="rates-legend">
+          <span><i /> {t.rates.totalLegend}</span>
+          <span><i /> {t.rates.personLegend}</span>
+        </div>
+      </section>
+
+      <BookingRequest locale={locale} />
+
       <section className="food-section" id="food">
         <div className="food-image">
           <Image
             src="/airom/breakfast.webp"
             alt={t.food.imageAlt}
             fill
-            sizes="(max-width: 900px) 100vw, 48vw"
+            quality={85}
+            sizes="(max-width: 900px) 100vw, 55vw"
           />
           <span className="food-badge"><UtensilsCrossed size={18} /> {t.food.badge}</span>
         </div>
@@ -357,88 +428,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section rates-section" id="rates">
-        <div className="section-heading rates-heading">
-          <div>
-            <p className="eyebrow">{t.rates.eyebrow}</p>
-            <h2>{t.rates.title}</h2>
-          </div>
-          <p>{t.rates.intro}</p>
-        </div>
-
-        <div className="hotels-pricing">
-          {hotelRates.map((hotel, hotelIndex) => (
-            <article className={`hotel-price-card hotel-price-card--${hotelIndex + 1}`} key={hotel.name}>
-              <header className="hotel-price-header">
-                <div className="hotel-price-icon"><Hotel size={24} /></div>
-                <div>
-                  <p>{t.rates.hotel}</p>
-                  <h3>{hotel.name}</h3>
-                  <span>{hotel.address}</span>
-                </div>
-                <strong>{hotel.from}</strong>
-              </header>
-
-              <div className="room-rate-list">
-                {hotel.rooms.map((room) => (
-                  <details className="room-rate" key={room.name} open>
-                    <summary>
-                      <span className="room-rate-heading"><strong>{room.name}</strong><small>{room.description}</small></span>
-                      <span className="room-rate-toggle">
-                        <span className="room-rate-expand">{t.rates.expand}</span>
-                        <span className="room-rate-collapse">{t.rates.collapse}</span>
-                        <ChevronDown size={20} aria-hidden="true" />
-                      </span>
-                    </summary>
-                    <div className="rate-table" role="table" aria-label={`${hotel.name}: ${room.name}`}>
-                      <div className="rate-table-head" role="row">
-                        <span>{t.rates.tariff}</span>
-                        <span>{t.rates.perRoom}</span>
-                        <span>{t.rates.perPerson}</span>
-                      </div>
-                      {room.options.map((option) => (
-                        <div className="rate-row" role="row" key={option.label}>
-                          <span>{option.label}</span>
-                          <strong>{option.total}</strong>
-                          <small>{option.perPerson ?? "—"}</small>
-                        </div>
-                      ))}
-                    </div>
-                  </details>
-                ))}
-              </div>
-
-              {hotelIndex === 0 && (
-                <p className="hotel-price-note">{t.rates.singleNote}</p>
-              )}
-            </article>
-          ))}
-        </div>
-
-        <div className="rates-legend">
-          <span><i /> {t.rates.totalLegend}</span>
-          <span><i /> {t.rates.personLegend}</span>
-        </div>
-      </section>
-
-      <section className="price-section">
-        <div>
-          <p className="eyebrow eyebrow--light">{t.booking.eyebrow}</p>
-          <h2>{t.booking.title}</h2>
-        </div>
-        <div className="price-main">
-          <span>{t.booking.roomsFrom}</span>
-          <strong>20 000 ₸</strong>
-          <small>{t.booking.perNight}</small>
-        </div>
-        <div className="price-actions">
-          <a className="button button--gold" href={phoneHref}><Phone size={18} /> {t.booking.call}</a>
-          <a className="button button--outline-light" href={whatsappHref} target="_blank" rel="noreferrer">
-            <WhatsAppIcon size={18} /> {t.booking.instagram}
-          </a>
-        </div>
-      </section>
-
       <section className="section gallery-section" id="gallery">
         <div className="section-heading section-heading--compact">
           <div>
@@ -447,13 +436,7 @@ export default function Home() {
           </div>
           <p>{t.gallery.note}</p>
         </div>
-        <div className="gallery-grid">
-          {gallery.map((src, index) => (
-            <figure className={`gallery-item gallery-item--${index + 1}`} key={src}>
-              <Image src={src} alt={t.gallery.alts[index]} fill sizes="(max-width: 700px) 100vw, 40vw" />
-            </figure>
-          ))}
-        </div>
+        <PhotoGallery locale={locale} />
       </section>
 
       <section className="contacts-section" id="contacts">
