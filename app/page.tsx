@@ -180,10 +180,14 @@ export default function Home() {
               </a>
               <span>{t.hero.whatsappNote}</span>
             </div>
-            <a className="button button--ghost" href="#rates">
-              {t.nav.rates}
-              <ArrowDownRight size={18} />
+            <a className="button button--instagram" href={instagramHref} target="_blank" rel="noreferrer">
+              <InstagramIcon size={19} />
+              Instagram
             </a>
+          </div>
+          <div className="hero-quick-links">
+            <a href="#rates">{t.nav.rates}<ArrowDownRight size={16} /></a>
+            <a href="#teams">{t.hero.teamTerms}<ArrowDownRight size={16} /></a>
           </div>
           <div className="hero-facts" aria-label={t.hero.factsLabel}>
             <div>
